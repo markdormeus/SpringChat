@@ -1,13 +1,12 @@
 package com.mdormeus.springchat.controller;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/")
 public class IndexController {
     @GetMapping("/")
     public String showMainMenu(Model model) {
@@ -21,12 +20,8 @@ public class IndexController {
         return options;
     }
     @GetMapping("/new-chat")
-    public String startNewGame() {
-        return "new-game";
-    }
-    @GetMapping("/load-game")
-    public String loadGame() {
-        return "load-game";
+    public String startChat() {
+        return "new-chat";
     }
     @GetMapping("/settings")
     public String showSettings() {
