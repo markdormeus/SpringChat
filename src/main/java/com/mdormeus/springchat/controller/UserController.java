@@ -2,8 +2,13 @@ package com.mdormeus.springchat.controller;
 
 import com.mdormeus.springchat.entity.User;
 import com.mdormeus.springchat.repo.UserRepository;
+import com.mdormeus.springchat.service.UserService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,25 +18,27 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService service;
 
-    @PostMapping
-    public User saveUser(@RequestBody User user) {
-        return userRepository.save(user);
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> findConnectedUsers() {
+        return ResponseEntity.ok(service.findConnectedUsers());
     }
 
-    @GetMapping
-    public List<User> findUsers() {
-        return userRepository.findAll();
+    @MessageMapping("/user.addUser")
+    @SendTo("/user/topic") //new queue for notifs
+    public User addUser(@Payload User user) {
+        service.saveUser(user);
+        return user; //subscribe to topic/queue
     }
 
-
-    @SneakyThrows
-    @GetMapping("/{id}")
-    public User findUser(@PathVariable int id) throws Exception {
-        User user = userRepository.findById(id).orElseThrow(() -> new Exception("User not available"));
-        return user;
+    @MessageMapping("/user.disconnectedUser")
+    @SendTo("/user/topic") //new queue for notifs
+    public User disconnect(@Payload User user) {
+        service.disconnect(user);
+        return user; //subscribe to topic/queue
     }
+
 
 
 
