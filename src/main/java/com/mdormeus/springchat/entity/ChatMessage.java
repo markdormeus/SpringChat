@@ -37,4 +37,6 @@ public class ChatMessage {
     @Column
     private Time timestamp;
 
+
+
 }
