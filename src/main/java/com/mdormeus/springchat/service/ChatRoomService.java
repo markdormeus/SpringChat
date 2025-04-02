@@ -43,6 +43,6 @@ public class ChatRoomService {
 
         chatRoomRepository.save(senderRecipient);
         chatRoomRepository.save(recipientSender);
-        return null;
+        return chatId;
     }
 }

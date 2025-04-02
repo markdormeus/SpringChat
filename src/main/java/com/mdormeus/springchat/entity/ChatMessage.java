@@ -1,9 +1,6 @@
 package com.mdormeus.springchat.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,22 +16,17 @@ import java.sql.Time;
 @Table(name="chatmessage")
 public class ChatMessage {
     @Id
-    @Column
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     private String chatId;
 
-    @Column
     private String senderId;
 
-    @Column
     private String recipientId;
 
-    @Column
     private String content;
 
-    @Column
     private Time timestamp;
 
 

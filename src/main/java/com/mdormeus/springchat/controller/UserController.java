@@ -1,45 +1,43 @@
 package com.mdormeus.springchat.controller;
 
 import com.mdormeus.springchat.entity.User;
-import com.mdormeus.springchat.repo.UserRepository;
 import com.mdormeus.springchat.service.UserService;
-import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/user")
+@Controller
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService service;
+    private final UserService userService;
+
+    @MessageMapping("/user.addUser")
+    @SendTo("/user/public")
+    public User addUser(
+            @Payload User user
+    ) {
+        userService.saveUser(user);
+        return user;
+    }
+
+    @MessageMapping("/user.disconnectUser")
+    @SendTo("/user/public")
+    public User disconnectUser(
+            @Payload User user
+    ) {
+        userService.disconnect(user);
+        return user;
+    }
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> findConnectedUsers() {
-        return ResponseEntity.ok(service.findConnectedUsers());
+        return ResponseEntity.ok(userService.findConnectedUsers());
     }
-
-    @MessageMapping("/user.addUser")
-    @SendTo("/user/topic") //new queue for notifs
-    public User addUser(@Payload User user) {
-        service.saveUser(user);
-        return user; //subscribe to topic/queue
-    }
-
-    @MessageMapping("/user.disconnectedUser")
-    @SendTo("/user/topic") //new queue for notifs
-    public User disconnect(@Payload User user) {
-        service.disconnect(user);
-        return user; //subscribe to topic/queue
-    }
-
-
-
-
 }

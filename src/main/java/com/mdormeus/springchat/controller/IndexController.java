@@ -11,7 +11,7 @@ public class IndexController {
     @GetMapping("/")
     public String showMainMenu(Model model) {
         model.addAttribute("options", getMainMenuOptions());
-        return "main-menu";
+        return "index";
     }
     private List<String> getMainMenuOptions() {
         List<String> options = new ArrayList<>();

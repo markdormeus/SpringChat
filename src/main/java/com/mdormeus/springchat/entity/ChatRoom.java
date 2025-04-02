@@ -1,9 +1,6 @@
 package com.mdormeus.springchat.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,16 +14,13 @@ import lombok.NoArgsConstructor;
 @Table(name="chatroom")
 public class ChatRoom {
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column
     private String chatId;
 
-    @Column
     private String senderId;
 
-    @Column
     private String recipientId;
 
 }

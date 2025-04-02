@@ -1,28 +1,22 @@
 package com.mdormeus.springchat.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name="user")
+@Table(name="chatuser")
 public class User {
     @Id
-    @Column
-    private String username;
+    @Column(name = "username")
+    private String userName;
 
-    @Column
+    @Column(name = "fullname")
     private String fullName;
 
-    @Column
-    private String password;
-
-    @Column
+    @Enumerated(EnumType.STRING)
     private Status status;
 
 }
