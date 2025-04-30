@@ -6,14 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="88f3bb35-1b74-450c-a6f3-c8744ab81abd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/controller/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/controller/IndexController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/entity/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/entity/ChatMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/entity/ChatNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/entity/ChatNotification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/entity/ChatRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/entity/ChatRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/service/ChatMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/service/ChatMessageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/service/ChatRoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mdormeus/springchat/service/ChatRoomService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/mdormeus/springchat/controller/IndexController.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
