@@ -1,26 +1,25 @@
 package com.mdormeus.springchat.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@Entity
 @Table(name="chatroom")
 public class ChatRoom {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private String id;
 
+    @Column(name = "chat_id")
     private String chatId;
 
+    @Column(name = "sender_id")
     private String senderId;
 
+    @Column(name = "recipient_id")
     private String recipientId;
 
 }

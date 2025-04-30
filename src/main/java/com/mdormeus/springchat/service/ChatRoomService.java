@@ -1,13 +1,10 @@
 package com.mdormeus.springchat.service;
-
 import com.mdormeus.springchat.entity.ChatRoom;
 import com.mdormeus.springchat.repo.ChatRoomRepository;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
-
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -28,14 +25,16 @@ public class ChatRoomService {
 
     private String createChatId(String senderId, String recipientId) {
         var chatId = String.format("%s_%s", senderId, recipientId);
+
         ChatRoom senderRecipient = ChatRoom.builder()
+                .id(UUID.randomUUID().toString())
                 .chatId(chatId)
                 .senderId(senderId)
                 .recipientId(recipientId)
                 .build();
 
-        ChatRoom recipientSender = ChatRoom
-                .builder() //inverse; chat room for both sides
+        ChatRoom recipientSender = ChatRoom.builder()
+                .id(UUID.randomUUID().toString())
                 .chatId(chatId)
                 .senderId(recipientId)
                 .recipientId(senderId)
@@ -43,6 +42,7 @@ public class ChatRoomService {
 
         chatRoomRepository.save(senderRecipient);
         chatRoomRepository.save(recipientSender);
+
         return chatId;
     }
 }
