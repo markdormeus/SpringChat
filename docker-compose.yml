@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: springchatdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: p@$sw0r3
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d springchatdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_DATABASE_URL: jdbc:postgresql://db:5432/springchatdb
+      DB_USER: admin
+      DB_PASSWORD: p@$sw0r3
+    expose:
+      - "8080"
+    restart: on-failure
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+
+volumes:
+  postgres_data:
